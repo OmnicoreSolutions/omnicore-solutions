@@ -1,6 +1,33 @@
 import ServiceCard from "./components/ServiceCard";
 
 function App() {
+  const path = window.location.pathname;
+
+  if (path === "/mechanical") {
+    return (
+      <div
+        style={{
+          backgroundColor: "#0a0f1c",
+          color: "white",
+          minHeight: "100vh",
+          padding: "40px",
+          fontFamily: "Arial, sans-serif",
+        }}
+      >
+        <h1>OMNICORE MECHANICAL SOLUTIONS</h1>
+
+        <p
+          style={{
+            color: "#6ab7ff",
+            fontSize: "22px",
+          }}
+        >
+          Precise Resource Pricing
+        </p>
+      </div>
+    );
+  }
+
   const divisions = [
     "Mechanical",
     "Manufacturing",
@@ -43,7 +70,7 @@ function App() {
           letterSpacing: "2px",
         }}
       >
-        The future of Universal Operation System
+        Powered by the UOS
       </p>
 
       <div
@@ -56,7 +83,17 @@ function App() {
         }}
       >
         {divisions.map((item) => (
-          <ServiceCard key={item} title={item} />
+          <div
+            key={item}
+            onClick={() => {
+              if (item === "Mechanical") {
+                window.location.href = "/mechanical";
+              }
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <ServiceCard title={item} />
+          </div>
         ))}
       </div>
 
