@@ -49,32 +49,56 @@ function App() {
 
   if (path === "/mechanical/hvac") {
     return (
-      <PageShell title="HVAC" subtitle="Full system diagnostic">
-        <BackButton route="/mechanical" label="Back to Mechanical" />
+      <PageShell
+        title="HVAC"
+        subtitle="Full system diagnostic"
+      >
+        <BackButton
+          route="/mechanical"
+          label="Back to Mechanical"
+        />
       </PageShell>
     );
   }
 
   if (path === "/mechanical/vehicle") {
     return (
-      <PageShell title="VEHICLE" subtitle="OBD2 diagnostics, maintenance, parts replacement">
-        <BackButton route="/mechanical" label="Back to Mechanical" />
+      <PageShell
+        title="VEHICLE"
+        subtitle="OBD2 diagnostics, maintenance, parts replacement"
+      >
+        <BackButton
+          route="/mechanical"
+          label="Back to Mechanical"
+        />
       </PageShell>
     );
   }
 
   if (path === "/mechanical/automation") {
     return (
-      <PageShell title="AUTOMATION SYSTEMS" subtitle="Security, hydroponics, servers, UPS systems, audio and video">
-        <BackButton route="/mechanical" label="Back to Mechanical" />
+      <PageShell
+        title="AUTOMATION SYSTEMS"
+        subtitle="Security, hydroponics, servers, UPS systems, audio and video"
+      >
+        <BackButton
+          route="/mechanical"
+          label="Back to Mechanical"
+        />
       </PageShell>
     );
   }
 
   if (path === "/mechanical/construction") {
     return (
-      <PageShell title="CONSTRUCTION" subtitle="Decks, kitchens, baths, outdoors">
-        <BackButton route="/mechanical" label="Back to Mechanical" />
+      <PageShell
+        title="CONSTRUCTION"
+        subtitle="Decks, kitchens, baths, outdoors"
+      >
+        <BackButton
+          route="/mechanical"
+          label="Back to Mechanical"
+        />
       </PageShell>
     );
   }
@@ -103,7 +127,10 @@ function App() {
   ];
 
   return (
-    <PageShell title="OMNICORE" subtitle="Powered by the UOS">
+    <PageShell
+      title="OMNICORE"
+      subtitle="Powered by the UOS"
+    >
       <CardGrid>
         {divisions.map((division) => (
           <div
@@ -218,4 +245,4 @@ function BackButton({ route, label }) {
   );
 }
 
-export default App; 
+export default App;
