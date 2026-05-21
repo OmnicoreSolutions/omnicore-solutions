@@ -90,7 +90,7 @@ function App() {
       <p
         style={{
           marginTop: "70px",
-          color: "#444444",
+          color: "#3f3f3f",
           fontSize: "14px",
           letterSpacing: "3px",
           fontWeight: "300",
@@ -121,7 +121,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
     <div
       style={{
         background:
-          "linear-gradient(180deg, #f4f4f4 0%, #d7d7d7 45%, #f0f0f0 100%)",
+          "linear-gradient(180deg, #d0d0d0 0%, #b8b8b8 50%, #d6d6d6 100%)",
         color: "#111111",
         minHeight: "100vh",
         display: "flex",
@@ -148,11 +148,11 @@ function PageShell({ version, title, subtitle, accent, children }) {
           position: "absolute",
           top: "24px",
           right: "32px",
-          color: "#2ea8ff",
+          color: "#00e5ff",
           fontSize: "11px",
           letterSpacing: "3px",
           fontFamily: "Orbitron, Arial, sans-serif",
-          opacity: 0.65,
+          opacity: 0.7,
         }}
       >
         {version}
@@ -175,7 +175,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
 
       <p
         style={{
-          color: "#2ea8ff",
+          color: "#00e5ff",
           fontFamily: "Montserrat, Arial, sans-serif",
           fontSize: "26px",
           fontWeight: "300",
@@ -198,13 +198,13 @@ function PageShell({ version, title, subtitle, accent, children }) {
           style={{
             width: "140px",
             height: "1px",
-            backgroundColor: "#2ea8ff",
+            backgroundColor: "#00e5ff",
           }}
         />
 
         <p
           style={{
-            color: "#2ea8ff",
+            color: "#00e5ff",
             fontFamily: "Montserrat, Arial, sans-serif",
             fontSize: "18px",
             fontWeight: "300",
@@ -219,7 +219,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
           style={{
             width: "140px",
             height: "1px",
-            backgroundColor: "#2ea8ff",
+            backgroundColor: "#00e5ff",
           }}
         />
       </div>
@@ -253,9 +253,9 @@ function BackButton({ route, label }) {
       }}
       style={{
         marginTop: "60px",
-        backgroundColor: "rgba(255,255,255,0.25)",
-        color: "#2ea8ff",
-        border: "1px solid #2ea8ff",
+        backgroundColor: "rgba(255,255,255,0.18)",
+        color: "#00e5ff",
+        border: "1px solid #00e5ff",
         borderRadius: "14px",
         padding: "14px 30px",
         cursor: "pointer",
