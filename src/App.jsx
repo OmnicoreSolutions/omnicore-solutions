@@ -90,7 +90,7 @@ function App() {
       <p
         style={{
           marginTop: "70px",
-          color: "#7d8797",
+          color: "#444444",
           fontSize: "14px",
           letterSpacing: "3px",
           fontWeight: "300",
@@ -120,8 +120,9 @@ function PageShell({ version, title, subtitle, accent, children }) {
   return (
     <div
       style={{
-        backgroundColor: "#050816",
-        color: "white",
+        background:
+          "linear-gradient(180deg, #f4f4f4 0%, #d7d7d7 45%, #f0f0f0 100%)",
+        color: "#111111",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -147,7 +148,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
           position: "absolute",
           top: "24px",
           right: "32px",
-          color: "#6ab7ff",
+          color: "#2ea8ff",
           fontSize: "11px",
           letterSpacing: "3px",
           fontFamily: "Orbitron, Arial, sans-serif",
@@ -166,6 +167,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
           marginBottom: "18px",
           letterSpacing: "18px",
           maxWidth: "1400px",
+          color: "#111111",
         }}
       >
         {title}
@@ -173,7 +175,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
 
       <p
         style={{
-          color: "#6ab7ff",
+          color: "#2ea8ff",
           fontFamily: "Montserrat, Arial, sans-serif",
           fontSize: "26px",
           fontWeight: "300",
@@ -192,10 +194,17 @@ function PageShell({ version, title, subtitle, accent, children }) {
           marginBottom: "58px",
         }}
       >
-        <div style={{ width: "140px", height: "1px", backgroundColor: "#6ab7ff" }} />
+        <div
+          style={{
+            width: "140px",
+            height: "1px",
+            backgroundColor: "#2ea8ff",
+          }}
+        />
+
         <p
           style={{
-            color: "#6ab7ff",
+            color: "#2ea8ff",
             fontFamily: "Montserrat, Arial, sans-serif",
             fontSize: "18px",
             fontWeight: "300",
@@ -205,7 +214,14 @@ function PageShell({ version, title, subtitle, accent, children }) {
         >
           {accent}
         </p>
-        <div style={{ width: "140px", height: "1px", backgroundColor: "#6ab7ff" }} />
+
+        <div
+          style={{
+            width: "140px",
+            height: "1px",
+            backgroundColor: "#2ea8ff",
+          }}
+        />
       </div>
 
       {children}
@@ -237,9 +253,9 @@ function BackButton({ route, label }) {
       }}
       style={{
         marginTop: "60px",
-        backgroundColor: "transparent",
-        color: "#6ab7ff",
-        border: "1px solid #6ab7ff",
+        backgroundColor: "rgba(255,255,255,0.25)",
+        color: "#2ea8ff",
+        border: "1px solid #2ea8ff",
         borderRadius: "14px",
         padding: "14px 30px",
         cursor: "pointer",
@@ -247,6 +263,7 @@ function BackButton({ route, label }) {
         fontWeight: "300",
         fontSize: "13px",
         fontFamily: "Montserrat, Arial, sans-serif",
+        backdropFilter: "blur(8px)",
       }}
     >
       {label}
