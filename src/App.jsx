@@ -4,63 +4,159 @@ function App() {
   const path = window.location.pathname;
 
   const mechanicalServices = [
-    { title: "HVAC", route: "/mechanical/hvac" },
-    { title: "Vehicle", route: "/mechanical/vehicle" },
-    { title: "Automation Systems", route: "/mechanical/automation" },
-    { title: "Construction", route: "/mechanical/construction" },
+    {
+      title: "HVAC",
+      route: "/mechanical/hvac",
+    },
+    {
+      title: "Vehicle",
+      route: "/mechanical/vehicle",
+    },
+    {
+      title: "Automation Systems",
+      route: "/mechanical/automation",
+    },
+    {
+      title: "Construction",
+      route: "/mechanical/construction",
+    },
   ];
 
   if (path === "/mechanical") {
     return (
-      <PageShell title="OMNICORE MECHANICAL SOLUTIONS" subtitle="Select service">
+      <PageShell
+        title="OMNICORE"
+        subtitle="MECHANICAL SOLUTIONS"
+      >
+        <p
+          style={{
+            color: "#6ab7ff",
+            marginTop: "-20px",
+            marginBottom: "60px",
+            letterSpacing: "4px",
+            fontSize: "18px",
+            fontWeight: "300",
+          }}
+        >
+          PRECISE RESOURCE PRICING
+        </p>
+
         <CardGrid>
           {mechanicalServices.map((service) => (
-            <div key={service.title} onClick={() => (window.location.href = service.route)} style={{ cursor: "pointer" }}>
+            <div
+              key={service.title}
+              onClick={() => {
+                window.location.href = service.route;
+              }}
+              style={{ cursor: "pointer" }}
+            >
               <ServiceCard title={service.title} />
             </div>
           ))}
         </CardGrid>
+
         <BackButton route="/" label="Back to OMNICORE" />
       </PageShell>
     );
   }
 
   if (path === "/mechanical/hvac") {
-    return <ServicePage title="HVAC" subtitle="Full system diagnostic" />;
+    return (
+      <PageShell
+        title="HVAC"
+        subtitle="FULL SYSTEM DIAGNOSTIC"
+      >
+        <BackButton route="/mechanical" label="Back to Mechanical" />
+      </PageShell>
+    );
   }
 
   if (path === "/mechanical/vehicle") {
-    return <ServicePage title="VEHICLE" subtitle="OBD2 diagnostics, maintenance, parts replacement" />;
+    return (
+      <PageShell
+        title="VEHICLE"
+        subtitle="OBD2 DIAGNOSTICS"
+      >
+        <BackButton route="/mechanical" label="Back to Mechanical" />
+      </PageShell>
+    );
   }
 
   if (path === "/mechanical/automation") {
-    return <ServicePage title="AUTOMATION SYSTEMS" subtitle="Security, hydroponics, servers, UPS systems, audio and video" />;
+    return (
+      <PageShell
+        title="AUTOMATION"
+        subtitle="SYSTEMS"
+      >
+        <BackButton route="/mechanical" label="Back to Mechanical" />
+      </PageShell>
+    );
   }
 
   if (path === "/mechanical/construction") {
-    return <ServicePage title="CONSTRUCTION" subtitle="Decks, kitchens, baths, outdoors" />;
+    return (
+      <PageShell
+        title="CONSTRUCTION"
+        subtitle="PROJECTS"
+      >
+        <BackButton route="/mechanical" label="Back to Mechanical" />
+      </PageShell>
+    );
   }
 
   const divisions = [
-    { title: "Mechanical", route: "/mechanical" },
-    { title: "Manufacturing", route: null },
-    { title: "Motors", route: null },
-    { title: "Medical", route: null },
-    { title: "Military", route: null },
+    {
+      title: "Mechanical",
+      route: "/mechanical",
+    },
+    {
+      title: "Manufacturing",
+      route: null,
+    },
+    {
+      title: "Motors",
+      route: null,
+    },
+    {
+      title: "Medical",
+      route: null,
+    },
+    {
+      title: "Military",
+      route: null,
+    },
   ];
 
   return (
-    <PageShell title="OMNICORE" subtitle="Powered by the UOS">
+    <PageShell
+      title="OMNICORE"
+      subtitle="UNIVERSAL OPERATING SYSTEM"
+    >
+      <p
+        style={{
+          color: "#6ab7ff",
+          marginTop: "-20px",
+          marginBottom: "60px",
+          letterSpacing: "4px",
+          fontSize: "18px",
+          fontWeight: "300",
+        }}
+      >
+        PRECISE RESOURCE PRICING
+      </p>
+
       <CardGrid>
         {divisions.map((division) => (
           <div
             key={division.title}
             onClick={() => {
-              if (division.route) window.location.href = division.route;
+              if (division.route) {
+                window.location.href = division.route;
+              }
             }}
             style={{
               cursor: division.route ? "pointer" : "default",
-              opacity: division.route ? 1 : 0.45,
+              opacity: division.route ? 1 : 0.35,
             }}
           >
             <ServiceCard title={division.title} />
@@ -68,17 +164,17 @@ function App() {
         ))}
       </CardGrid>
 
-      <p style={{ marginTop: "60px", color: "#888", fontSize: "14px", letterSpacing: "1px" }}>
-        Don’t get charged what you don’t need to pay.
+      <p
+        style={{
+          marginTop: "70px",
+          color: "#7d8797",
+          fontSize: "14px",
+          letterSpacing: "2px",
+          fontWeight: "300",
+        }}
+      >
+        DON’T GET CHARGED WHAT YOU DON’T NEED TO PAY
       </p>
-    </PageShell>
-  );
-}
-
-function ServicePage({ title, subtitle }) {
-  return (
-    <PageShell title={title} subtitle={subtitle}>
-      <BackButton route="/mechanical" label="Back to Mechanical" />
     </PageShell>
   );
 }
@@ -87,7 +183,7 @@ function PageShell({ title, subtitle, children }) {
   return (
     <div
       style={{
-        backgroundColor: "#0a0f1c",
+        backgroundColor: "#050816",
         color: "white",
         minHeight: "100vh",
         display: "flex",
@@ -99,11 +195,28 @@ function PageShell({ title, subtitle, children }) {
         padding: "40px",
       }}
     >
-      <h1 style={{ fontSize: "40px", marginBottom: "10px", letterSpacing: "4px", maxWidth: "1200px" }}>
+      <h1
+        style={{
+          fontSize: "72px",
+          fontWeight: "200",
+          lineHeight: "1",
+          marginBottom: "10px",
+          letterSpacing: "6px",
+          maxWidth: "1400px",
+        }}
+      >
         {title}
       </h1>
 
-      <p style={{ color: "#6ab7ff", fontSize: "22px", marginBottom: "50px", letterSpacing: "2px" }}>
+      <p
+        style={{
+          color: "#6ab7ff",
+          fontSize: "28px",
+          fontWeight: "300",
+          marginBottom: "20px",
+          letterSpacing: "6px",
+        }}
+      >
         {subtitle}
       </p>
 
@@ -114,7 +227,15 @@ function PageShell({ title, subtitle, children }) {
 
 function CardGrid({ children }) {
   return (
-    <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center", maxWidth: "1200px" }}>
+    <div
+      style={{
+        display: "flex",
+        gap: "28px",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        maxWidth: "1300px",
+      }}
+    >
       {children}
     </div>
   );
@@ -123,16 +244,20 @@ function CardGrid({ children }) {
 function BackButton({ route, label }) {
   return (
     <button
-      onClick={() => (window.location.href = route)}
+      onClick={() => {
+        window.location.href = route;
+      }}
       style={{
-        marginTop: "50px",
+        marginTop: "60px",
         backgroundColor: "transparent",
         color: "#6ab7ff",
         border: "1px solid #6ab7ff",
-        borderRadius: "12px",
-        padding: "12px 24px",
+        borderRadius: "14px",
+        padding: "14px 30px",
         cursor: "pointer",
-        letterSpacing: "1px",
+        letterSpacing: "2px",
+        fontWeight: "300",
+        fontSize: "14px",
       }}
     >
       {label}
