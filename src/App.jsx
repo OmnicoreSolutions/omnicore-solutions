@@ -3,72 +3,74 @@ import ServiceCard from "./components/ServiceCard";
 function App() {
   const path = window.location.pathname;
 
-  const mechanicalServices = [
-    { title: "HVAC", route: "/mechanical/hvac" },
-    { title: "Vehicle", route: "/mechanical/vehicle" },
-    { title: "Automation Systems", route: "/mechanical/automation" },
-    { title: "Construction", route: "/mechanical/construction" },
+  const divisions = [
+    {
+      title: "MECHANICAL",
+      route: "/mechanical",
+    },
+    {
+      title: "MANUFACTURING",
+      route: "/manufacturing",
+    },
+    {
+      title: "MEDICAL",
+      route: "/medical",
+    },
+    {
+      title: "MILITARY",
+      route: "/military",
+    },
+    {
+      title: "MOTORS",
+      route: "/motors",
+    },
   ];
 
   if (path === "/mechanical") {
     return (
-      <PageShell
-        version="VERSION 1"
-        title="OMNICORE"
-        subtitle="MECHANICAL SOLUTIONS"
-        accent="PRECISE RESOURCE PRICING"
-      >
-        <CardGrid>
-          {mechanicalServices.map((service) => (
+      <PageShell>
+        <TopVersion />
+
+        <MainLogo />
+
+        <SubText />
+
+        <DivisionLabel />
+
+        <CardContainer>
+          {divisions.map((division) => (
             <div
-              key={service.title}
+              key={division.title}
               onClick={() => {
-                window.location.href = service.route;
+                if (division.route) {
+                  window.location.href = division.route;
+                }
               }}
-              style={{ cursor: "pointer" }}
+              style={{
+                cursor: "pointer",
+              }}
             >
-              <ServiceCard title={service.title} />
+              <ServiceCard title={division.title} />
             </div>
           ))}
-        </CardGrid>
+        </CardContainer>
 
-        <BackButton route="/" label="BACK TO OMNICORE" />
+        <FooterBar />
       </PageShell>
     );
   }
 
-  if (path === "/mechanical/hvac") {
-    return <ServicePage title="HVAC" subtitle="FULL SYSTEM DIAGNOSTIC" />;
-  }
-
-  if (path === "/mechanical/vehicle") {
-    return <ServicePage title="VEHICLE" subtitle="OBD2 DIAGNOSTICS" />;
-  }
-
-  if (path === "/mechanical/automation") {
-    return <ServicePage title="AUTOMATION" subtitle="SYSTEMS" />;
-  }
-
-  if (path === "/mechanical/construction") {
-    return <ServicePage title="CONSTRUCTION" subtitle="PROJECTS" />;
-  }
-
-  const divisions = [
-    { title: "Mechanical", route: "/mechanical" },
-    { title: "Manufacturing", route: null },
-    { title: "Motors", route: null },
-    { title: "Medical", route: null },
-    { title: "Military", route: null },
-  ];
-
   return (
-    <PageShell
-      version="VERSION 1"
-      title="OMNICORE"
-      subtitle="UNIVERSAL OPERATING SYSTEM"
-      accent="PRECISE RESOURCE PRICING"
-    >
-      <CardGrid>
+    <PageShell>
+      <TopVersion />
+
+      <MainLogo />
+
+      <SubText />
+
+      <DivisionLabel />
+
+      <CardContainer>
         {divisions.map((division) => (
           <div
             key={division.title}
@@ -78,200 +80,289 @@ function App() {
               }
             }}
             style={{
-              cursor: division.route ? "pointer" : "default",
-              opacity: division.route ? 1 : 0.35,
+              cursor: "pointer",
             }}
           >
             <ServiceCard title={division.title} />
           </div>
         ))}
-      </CardGrid>
+      </CardContainer>
 
-      <p
-        style={{
-          marginTop: "70px",
-          color: "#8c8c8c",
-          fontSize: "14px",
-          letterSpacing: "3px",
-          fontWeight: "300",
-          fontFamily: "Montserrat, Arial, sans-serif",
-        }}
-      >
-        DON’T GET CHARGED WHAT YOU DON’T NEED TO PAY
-      </p>
+      <FooterBar />
     </PageShell>
   );
 }
 
-function ServicePage({ title, subtitle }) {
-  return (
-    <PageShell
-      version="VERSION 1"
-      title={title}
-      subtitle={subtitle}
-      accent="PRECISE RESOURCE PRICING"
-    >
-      <BackButton route="/mechanical" label="BACK TO MECHANICAL" />
-    </PageShell>
-  );
-}
-
-function PageShell({ version, title, subtitle, accent, children }) {
+function PageShell({ children }) {
   return (
     <div
       style={{
-        background:
-          "linear-gradient(180deg, #050505 0%, #0c0c0c 50%, #050505 100%)",
-        color: "#c8c8c8",
         minHeight: "100vh",
+
+        background:
+          "linear-gradient(180deg, #020202 0%, #050505 40%, #090909 100%)",
+
+        color: "#d4d4d4",
+
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+
         alignItems: "center",
-        textAlign: "center",
-        padding: "40px",
+
+        paddingTop: "40px",
+
         fontFamily: "Montserrat, Arial, sans-serif",
+
+        overflowX: "hidden",
       }}
     >
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Orbitron:wght@400;500;600&display=swap');
+      {children}
+    </div>
+  );
+}
 
-          body {
-            margin: 0;
-            background: #050505;
-          }
-        `}
-      </style>
+function TopVersion() {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: "30px",
+        right: "40px",
 
-      <div
+        color: "#00e5ff",
+
+        letterSpacing: "4px",
+
+        fontSize: "14px",
+
+        fontWeight: "300",
+      }}
+    >
+      VERSION 2
+    </div>
+  );
+}
+
+function MainLogo() {
+  return (
+    <>
+      <img
+        src="/logo.png"
+        alt="OMNICORE"
         style={{
-          position: "absolute",
-          top: "24px",
-          right: "32px",
-          color: "#00f0ff",
-          fontSize: "11px",
-          letterSpacing: "3px",
-          fontFamily: "Orbitron, Arial, sans-serif",
-          opacity: 0.7,
+          width: "150px",
+          marginTop: "30px",
+          marginBottom: "25px",
         }}
-      >
-        {version}
-      </div>
+      />
 
       <h1
         style={{
-          fontFamily: "Orbitron, Arial, sans-serif",
-          fontSize: "68px",
-          fontWeight: "500",
-          lineHeight: "1",
-          marginBottom: "18px",
+          margin: 0,
+
+          fontSize: "84px",
+
+          fontWeight: "300",
+
           letterSpacing: "18px",
-          maxWidth: "1400px",
-          color: "#d4d4d4",
-          textShadow: "0px 0px 10px rgba(255,255,255,0.08)",
+
+          color: "#d9d9d9",
+
+          textAlign: "center",
         }}
       >
-        {title}
+        OMNICORE
       </h1>
 
-      <p
+      <div
         style={{
+          marginTop: "14px",
+
           color: "#00e5ff",
-          fontFamily: "Montserrat, Arial, sans-serif",
-          fontSize: "26px",
-          fontWeight: "300",
-          marginBottom: "26px",
+
+          fontSize: "28px",
+
           letterSpacing: "12px",
+
+          fontWeight: "300",
         }}
       >
-        {subtitle}
-      </p>
+        MECHANICAL SOLUTIONS
+      </div>
 
+      <div
+        style={{
+          width: "420px",
+          height: "1px",
+
+          background: "#00e5ff",
+
+          marginTop: "24px",
+
+          opacity: 0.6,
+        }}
+      />
+
+      <div
+        style={{
+          marginTop: "30px",
+
+          color: "#cfcfcf",
+
+          fontSize: "24px",
+
+          fontWeight: "300",
+        }}
+      >
+        Only pay for what your job actually requires.
+      </div>
+
+      <div
+        style={{
+          marginTop: "14px",
+
+          color: "#00e5ff",
+
+          fontSize: "15px",
+
+          letterSpacing: "3px",
+
+          fontWeight: "500",
+        }}
+      >
+        VERIFIED. TRANSPARENT. PRECISE.
+      </div>
+    </>
+  );
+}
+
+function SubText() {
+  return null;
+}
+
+function DivisionLabel() {
+  return (
+    <div
+      style={{
+        marginTop: "70px",
+        marginBottom: "36px",
+
+        color: "#bdbdbd",
+
+        letterSpacing: "8px",
+
+        fontSize: "20px",
+
+        fontWeight: "300",
+      }}
+    >
+      SELECT DIVISION
+    </div>
+  );
+}
+
+function CardContainer({ children }) {
+  return (
+    <div
+      style={{
+        width: "100%",
+
+        display: "flex",
+
+        justifyContent: "center",
+
+        flexWrap: "wrap",
+
+        gap: "28px",
+
+        paddingBottom: "120px",
+
+        maxWidth: "1500px",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function FooterBar() {
+  return (
+    <div
+      style={{
+        width: "100%",
+
+        height: "78px",
+
+        marginTop: "auto",
+
+        borderTop: "1px solid rgba(0,229,255,0.18)",
+
+        background:
+          "linear-gradient(90deg, #050505 0%, #081018 50%, #050505 100%)",
+
+        display: "flex",
+
+        alignItems: "center",
+
+        justifyContent: "space-between",
+
+        paddingLeft: "34px",
+
+        paddingRight: "34px",
+
+        boxSizing: "border-box",
+      }}
+    >
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "32px",
-          marginBottom: "58px",
+          gap: "14px",
         }}
       >
-        <div
+        <img
+          src="/logo.png"
+          alt="OMNICORE"
           style={{
-            width: "140px",
-            height: "1px",
-            backgroundColor: "#00e5ff",
-            opacity: 0.7,
+            width: "28px",
           }}
         />
 
-        <p
+        <div
           style={{
-            color: "#00e5ff",
-            fontFamily: "Montserrat, Arial, sans-serif",
-            fontSize: "18px",
-            fontWeight: "300",
-            letterSpacing: "8px",
-            margin: 0,
+            color: "#d4d4d4",
+
+            letterSpacing: "4px",
+
+            fontSize: "14px",
           }}
         >
-          {accent}
-        </p>
-
-        <div
-          style={{
-            width: "140px",
-            height: "1px",
-            backgroundColor: "#00e5ff",
-            opacity: 0.7,
-          }}
-        />
+          OMNICORE
+          <span
+            style={{
+              color: "#00e5ff",
+              marginLeft: "10px",
+            }}
+          >
+            MECHANICAL SOLUTIONS
+          </span>
+        </div>
       </div>
 
-      {children}
-    </div>
-  );
-}
+      <div
+        style={{
+          color: "#00e5ff",
 
-function CardGrid({ children }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        gap: "28px",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        maxWidth: "1300px",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
+          fontSize: "28px",
 
-function BackButton({ route, label }) {
-  return (
-    <button
-      onClick={() => {
-        window.location.href = route;
-      }}
-      style={{
-        marginTop: "60px",
-        backgroundColor: "#0a0a0a",
-        color: "#00e5ff",
-        border: "1px solid #00e5ff",
-        borderRadius: "14px",
-        padding: "14px 30px",
-        cursor: "pointer",
-        letterSpacing: "3px",
-        fontWeight: "300",
-        fontSize: "13px",
-        fontFamily: "Montserrat, Arial, sans-serif",
-        transition: "0.2s ease",
-      }}
-    >
-      {label}
-    </button>
+          fontWeight: "300",
+
+          letterSpacing: "3px",
+        }}
+      >
+        786 516 7086
+      </div>
+    </div>
   );
 }
 
