@@ -4,43 +4,20 @@ function App() {
   const path = window.location.pathname;
 
   const mechanicalServices = [
-    {
-      title: "HVAC",
-      route: "/mechanical/hvac",
-    },
-    {
-      title: "Vehicle",
-      route: "/mechanical/vehicle",
-    },
-    {
-      title: "Automation Systems",
-      route: "/mechanical/automation",
-    },
-    {
-      title: "Construction",
-      route: "/mechanical/construction",
-    },
+    { title: "HVAC", route: "/mechanical/hvac" },
+    { title: "Vehicle", route: "/mechanical/vehicle" },
+    { title: "Automation Systems", route: "/mechanical/automation" },
+    { title: "Construction", route: "/mechanical/construction" },
   ];
 
   if (path === "/mechanical") {
     return (
       <PageShell
+        version="VERSION 1"
         title="OMNICORE"
         subtitle="MECHANICAL SOLUTIONS"
+        accent="PRECISE RESOURCE PRICING"
       >
-        <p
-          style={{
-            color: "#6ab7ff",
-            marginTop: "-20px",
-            marginBottom: "60px",
-            letterSpacing: "4px",
-            fontSize: "18px",
-            fontWeight: "300",
-          }}
-        >
-          PRECISE RESOURCE PRICING
-        </p>
-
         <CardGrid>
           {mechanicalServices.map((service) => (
             <div
@@ -55,96 +32,42 @@ function App() {
           ))}
         </CardGrid>
 
-        <BackButton route="/" label="Back to OMNICORE" />
+        <BackButton route="/" label="BACK TO OMNICORE" />
       </PageShell>
     );
   }
 
   if (path === "/mechanical/hvac") {
-    return (
-      <PageShell
-        title="HVAC"
-        subtitle="FULL SYSTEM DIAGNOSTIC"
-      >
-        <BackButton route="/mechanical" label="Back to Mechanical" />
-      </PageShell>
-    );
+    return <ServicePage title="HVAC" subtitle="FULL SYSTEM DIAGNOSTIC" />;
   }
 
   if (path === "/mechanical/vehicle") {
-    return (
-      <PageShell
-        title="VEHICLE"
-        subtitle="OBD2 DIAGNOSTICS"
-      >
-        <BackButton route="/mechanical" label="Back to Mechanical" />
-      </PageShell>
-    );
+    return <ServicePage title="VEHICLE" subtitle="OBD2 DIAGNOSTICS" />;
   }
 
   if (path === "/mechanical/automation") {
-    return (
-      <PageShell
-        title="AUTOMATION"
-        subtitle="SYSTEMS"
-      >
-        <BackButton route="/mechanical" label="Back to Mechanical" />
-      </PageShell>
-    );
+    return <ServicePage title="AUTOMATION" subtitle="SYSTEMS" />;
   }
 
   if (path === "/mechanical/construction") {
-    return (
-      <PageShell
-        title="CONSTRUCTION"
-        subtitle="PROJECTS"
-      >
-        <BackButton route="/mechanical" label="Back to Mechanical" />
-      </PageShell>
-    );
+    return <ServicePage title="CONSTRUCTION" subtitle="PROJECTS" />;
   }
 
   const divisions = [
-    {
-      title: "Mechanical",
-      route: "/mechanical",
-    },
-    {
-      title: "Manufacturing",
-      route: null,
-    },
-    {
-      title: "Motors",
-      route: null,
-    },
-    {
-      title: "Medical",
-      route: null,
-    },
-    {
-      title: "Military",
-      route: null,
-    },
+    { title: "Mechanical", route: "/mechanical" },
+    { title: "Manufacturing", route: null },
+    { title: "Motors", route: null },
+    { title: "Medical", route: null },
+    { title: "Military", route: null },
   ];
 
   return (
     <PageShell
+      version="VERSION 1"
       title="OMNICORE"
       subtitle="UNIVERSAL OPERATING SYSTEM"
+      accent="PRECISE RESOURCE PRICING"
     >
-      <p
-        style={{
-          color: "#6ab7ff",
-          marginTop: "-20px",
-          marginBottom: "60px",
-          letterSpacing: "4px",
-          fontSize: "18px",
-          fontWeight: "300",
-        }}
-      >
-        PRECISE RESOURCE PRICING
-      </p>
-
       <CardGrid>
         {divisions.map((division) => (
           <div
@@ -169,8 +92,9 @@ function App() {
           marginTop: "70px",
           color: "#7d8797",
           fontSize: "14px",
-          letterSpacing: "2px",
+          letterSpacing: "3px",
           fontWeight: "300",
+          fontFamily: "Montserrat, Arial, sans-serif",
         }}
       >
         DON’T GET CHARGED WHAT YOU DON’T NEED TO PAY
@@ -179,7 +103,20 @@ function App() {
   );
 }
 
-function PageShell({ title, subtitle, children }) {
+function ServicePage({ title, subtitle }) {
+  return (
+    <PageShell
+      version="VERSION 1"
+      title={title}
+      subtitle={subtitle}
+      accent="PRECISE RESOURCE PRICING"
+    >
+      <BackButton route="/mechanical" label="BACK TO MECHANICAL" />
+    </PageShell>
+  );
+}
+
+function PageShell({ version, title, subtitle, accent, children }) {
   return (
     <div
       style={{
@@ -190,18 +127,44 @@ function PageShell({ title, subtitle, children }) {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        fontFamily: "Arial, sans-serif",
         textAlign: "center",
         padding: "40px",
+        fontFamily: "Montserrat, Arial, sans-serif",
       }}
     >
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Orbitron:wght@400;500;600&display=swap');
+
+          body {
+            margin: 0;
+          }
+        `}
+      </style>
+
+      <div
+        style={{
+          position: "absolute",
+          top: "24px",
+          right: "32px",
+          color: "#6ab7ff",
+          fontSize: "11px",
+          letterSpacing: "3px",
+          fontFamily: "Orbitron, Arial, sans-serif",
+          opacity: 0.65,
+        }}
+      >
+        {version}
+      </div>
+
       <h1
         style={{
-          fontSize: "72px",
-          fontWeight: "200",
+          fontFamily: "Orbitron, Arial, sans-serif",
+          fontSize: "68px",
+          fontWeight: "500",
           lineHeight: "1",
-          marginBottom: "10px",
-          letterSpacing: "6px",
+          marginBottom: "18px",
+          letterSpacing: "18px",
           maxWidth: "1400px",
         }}
       >
@@ -211,14 +174,39 @@ function PageShell({ title, subtitle, children }) {
       <p
         style={{
           color: "#6ab7ff",
-          fontSize: "28px",
+          fontFamily: "Montserrat, Arial, sans-serif",
+          fontSize: "26px",
           fontWeight: "300",
-          marginBottom: "20px",
-          letterSpacing: "6px",
+          marginBottom: "26px",
+          letterSpacing: "12px",
         }}
       >
         {subtitle}
       </p>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "32px",
+          marginBottom: "58px",
+        }}
+      >
+        <div style={{ width: "140px", height: "1px", backgroundColor: "#6ab7ff" }} />
+        <p
+          style={{
+            color: "#6ab7ff",
+            fontFamily: "Montserrat, Arial, sans-serif",
+            fontSize: "18px",
+            fontWeight: "300",
+            letterSpacing: "8px",
+            margin: 0,
+          }}
+        >
+          {accent}
+        </p>
+        <div style={{ width: "140px", height: "1px", backgroundColor: "#6ab7ff" }} />
+      </div>
 
       {children}
     </div>
@@ -255,9 +243,10 @@ function BackButton({ route, label }) {
         borderRadius: "14px",
         padding: "14px 30px",
         cursor: "pointer",
-        letterSpacing: "2px",
+        letterSpacing: "3px",
         fontWeight: "300",
-        fontSize: "14px",
+        fontSize: "13px",
+        fontFamily: "Montserrat, Arial, sans-serif",
       }}
     >
       {label}
