@@ -168,7 +168,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
           marginBottom: "18px",
           letterSpacing: "18px",
           maxWidth: "1400px",
-          color: "#cfcfcf",
+          color: "#d4d4d4",
           textShadow: "0px 0px 10px rgba(255,255,255,0.08)",
         }}
       >
@@ -177,7 +177,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
 
       <p
         style={{
-          color: "#00f0ff",
+          color: "#00e5ff",
           fontFamily: "Montserrat, Arial, sans-serif",
           fontSize: "26px",
           fontWeight: "300",
@@ -200,14 +200,14 @@ function PageShell({ version, title, subtitle, accent, children }) {
           style={{
             width: "140px",
             height: "1px",
-            backgroundColor: "#00f0ff",
+            backgroundColor: "#00e5ff",
             opacity: 0.7,
           }}
         />
 
         <p
           style={{
-            color: "#00f0ff",
+            color: "#00e5ff",
             fontFamily: "Montserrat, Arial, sans-serif",
             fontSize: "18px",
             fontWeight: "300",
@@ -222,7 +222,7 @@ function PageShell({ version, title, subtitle, accent, children }) {
           style={{
             width: "140px",
             height: "1px",
-            backgroundColor: "#00f0ff",
+            backgroundColor: "#00e5ff",
             opacity: 0.7,
           }}
         />
@@ -257,9 +257,9 @@ function BackButton({ route, label }) {
       }}
       style={{
         marginTop: "60px",
-        backgroundColor: "#050505",
-        color: "#00f0ff",
-        border: "1px solid #00f0ff",
+        backgroundColor: "#0a0a0a",
+        color: "#00e5ff",
+        border: "1px solid #00e5ff",
         borderRadius: "14px",
         padding: "14px 30px",
         cursor: "pointer",
