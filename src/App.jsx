@@ -48,7 +48,7 @@ const BRANCHES = [
       {
         name: "RUMBLER",
         description:
-          "A hybrid armored three-wheel all-terrain vehicle concept featuring a two-person center cockpit, high-torque rear in-hub motor, and a modular passenger or cargo trailer-pod capability.",
+          "A hybrid armored three-wheel all-terrain vehicle concept featuring a two-person center cockpit, high-torque rear in-hub motor, and modular passenger or cargo trailer-pod capability.",
       },
       {
         name: "LOCUST",
@@ -121,7 +121,6 @@ function MainHeader() {
   return (
     <header className="main-header">
       <CubeLogo />
-
       <div className="brand-title">OMNICORE</div>
       <div className="brand-subtitle">SOLUTIONS</div>
     </header>
@@ -145,6 +144,8 @@ function BranchSelector({
   onPrevious,
   onNext,
 }) {
+  const isLongBranch = branch.title.length > 9;
+
   return (
     <section className="branch-section">
       <div className="section-label">SELECT BRANCH</div>
@@ -158,7 +159,13 @@ function BranchSelector({
           ‹
         </button>
 
-        <h1 className="branch-title">{branch.title}</h1>
+        <h1
+          className={
+            isLongBranch ? "branch-title branch-title-long" : "branch-title"
+          }
+        >
+          {branch.title}
+        </h1>
 
         <button
           className="arrow-button"
@@ -198,6 +205,8 @@ function ServiceSection({ services }) {
 }
 
 function ServiceRow({ service }) {
+  const compactName = service.name.length >= 9;
+
   return (
     <button
       className="service-row"
@@ -208,7 +217,13 @@ function ServiceRow({ service }) {
           .replaceAll(" ", "-")}`;
       }}
     >
-      <div className="service-button">{service.name}</div>
+      <div
+        className={
+          compactName ? "service-button service-button-compact" : "service-button"
+        }
+      >
+        {service.name}
+      </div>
       <p className="service-description">{service.description}</p>
     </button>
   );
@@ -227,12 +242,7 @@ const styles = `
 
 :root {
   --cyan: #00eaff;
-  --cyan-soft: rgba(0, 234, 255, 0.65);
   --cyan-glow: rgba(0, 234, 255, 0.55);
-  --metal-light: #d5d5d5;
-  --metal-mid: #9c9c9c;
-  --metal-dark: #494949;
-  --black-soft: #1d1d1d;
 }
 
 * {
@@ -276,7 +286,7 @@ button {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  padding: 34px 34px 32px;
+  padding: 34px 32px 88px;
   border-radius: 28px;
   border: 2px solid #1f1f1f;
   background:
@@ -429,18 +439,19 @@ button {
 }
 
 .branch-row {
+  width: 100%;
   margin-top: 28px;
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  grid-template-columns: 26px minmax(0, 1fr) 26px;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .arrow-button {
   border: 0;
   background: transparent;
   color: var(--cyan);
-  font-size: 52px;
+  font-size: 46px;
   line-height: 1;
   font-weight: 300;
   cursor: pointer;
@@ -455,15 +466,19 @@ button {
   font-family: "Orbitron", Arial, sans-serif;
   font-size: clamp(28px, 8vw, 43px);
   font-weight: 500;
-  letter-spacing: clamp(4px, 2.4vw, 11px);
+  letter-spacing: clamp(4px, 2vw, 9px);
   color: var(--cyan);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
+  text-align: center;
   text-shadow:
     0 0 8px var(--cyan-glow),
     0 1px 0 #ffffff,
     0 3px 5px rgba(0,0,0,0.28);
+}
+
+.branch-title-long {
+  font-size: clamp(22px, 6.5vw, 34px);
+  letter-spacing: clamp(2px, 1.2vw, 5px);
 }
 
 .branch-dots {
@@ -509,9 +524,9 @@ button {
   width: 100%;
   min-height: 92px;
   display: grid;
-  grid-template-columns: minmax(128px, 42%) minmax(0, 1fr);
+  grid-template-columns: minmax(128px, 40%) minmax(0, 1fr);
   align-items: center;
-  gap: 22px;
+  gap: 24px;
   border: 0;
   background: transparent;
   text-align: left;
@@ -522,25 +537,25 @@ button {
 .service-button {
   width: 100%;
   min-height: 72px;
-  padding: 14px 10px;
+  padding: 14px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   clip-path: polygon(
-    9% 0,
-    91% 0,
+    7% 0,
+    93% 0,
     100% 22%,
     100% 78%,
-    91% 100%,
-    9% 100%,
+    93% 100%,
+    7% 100%,
     0 78%,
     0 22%
   );
   border: 2px solid var(--cyan);
   color: var(--cyan);
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: clamp(18px, 4.8vw, 29px);
-  letter-spacing: clamp(2px, 1.5vw, 7px);
+  font-size: clamp(16px, 4.4vw, 27px);
+  letter-spacing: clamp(2px, 1.1vw, 5px);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -552,6 +567,11 @@ button {
     0 0 7px rgba(0,234,255,0.28);
   background:
     linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.025));
+}
+
+.service-button-compact {
+  font-size: clamp(12px, 3.45vw, 18px);
+  letter-spacing: clamp(1px, 0.8vw, 3px);
 }
 
 .service-description {
@@ -605,7 +625,7 @@ button {
   .phone-frame {
     width: 100%;
     min-height: 100vh;
-    padding: 28px 18px 28px;
+    padding: 28px 18px 110px;
     border-radius: 0;
     border-left: 0;
     border-right: 0;
@@ -669,17 +689,22 @@ button {
 
   .branch-row {
     margin-top: 28px;
-    grid-template-columns: 26px minmax(0, 1fr) 26px;
-    gap: 6px;
+    grid-template-columns: 24px minmax(0, 1fr) 24px;
+    gap: 4px;
   }
 
   .arrow-button {
-    font-size: 42px;
+    font-size: 40px;
   }
 
   .branch-title {
-    font-size: clamp(28px, 8.8vw, 36px);
-    letter-spacing: clamp(3px, 1.8vw, 6px);
+    font-size: clamp(27px, 8.3vw, 34px);
+    letter-spacing: clamp(3px, 1.5vw, 5px);
+  }
+
+  .branch-title-long {
+    font-size: clamp(21px, 6.3vw, 27px);
+    letter-spacing: clamp(1px, 0.75vw, 3px);
   }
 
   .branch-dots {
@@ -702,16 +727,21 @@ button {
   }
 
   .service-row {
-    grid-template-columns: minmax(124px, 43%) minmax(0, 1fr);
-    gap: 14px;
+    grid-template-columns: minmax(134px, 41%) minmax(0, 1fr);
+    gap: 16px;
     min-height: 92px;
   }
 
   .service-button {
     min-height: 66px;
-    font-size: clamp(17px, 4.8vw, 20px);
-    letter-spacing: clamp(2px, 1.2vw, 4px);
-    padding: 12px 8px;
+    font-size: clamp(16px, 4.3vw, 19px);
+    letter-spacing: clamp(2px, 1vw, 3px);
+    padding: 12px 7px;
+  }
+
+  .service-button-compact {
+    font-size: clamp(11px, 3.1vw, 15px);
+    letter-spacing: clamp(1px, 0.55vw, 2px);
   }
 
   .service-description {
@@ -728,7 +758,7 @@ button {
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 390px) {
   .phone-frame {
     padding-left: 14px;
     padding-right: 14px;
@@ -749,14 +779,24 @@ button {
     letter-spacing: 4px;
   }
 
+  .branch-title-long {
+    font-size: 23px;
+    letter-spacing: 2px;
+  }
+
   .service-row {
-    grid-template-columns: minmax(116px, 42%) minmax(0, 1fr);
-    gap: 12px;
+    grid-template-columns: minmax(126px, 40%) minmax(0, 1fr);
+    gap: 13px;
   }
 
   .service-button {
     font-size: 16px;
     letter-spacing: 2px;
+  }
+
+  .service-button-compact {
+    font-size: 11px;
+    letter-spacing: 1px;
   }
 
   .service-description {
