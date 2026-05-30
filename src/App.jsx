@@ -78,12 +78,12 @@ function App() {
   return (
     <PageShell>
       <PhoneFrame>
-        <StatusBar />
         <MenuButton />
         <MainHeader />
         <BranchSelector
           branch={activeBranch}
           branchIndex={branchIndex}
+          setBranchIndex={setBranchIndex}
           onPrevious={goPrevious}
           onNext={goNext}
         />
@@ -105,33 +105,6 @@ function PageShell({ children }) {
 
 function PhoneFrame({ children }) {
   return <main className="phone-frame">{children}</main>;
-}
-
-function StatusBar() {
-  return (
-    <div className="status-bar">
-      <div className="status-time">9:41</div>
-
-      <div className="status-icons">
-        <div className="signal-bars">
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-
-        <div className="wifi-icon">
-          <span />
-          <span />
-          <span />
-        </div>
-
-        <div className="battery-icon">
-          <div />
-        </div>
-      </div>
-    </div>
-  );
 }
 
 function MenuButton() {
@@ -165,19 +138,33 @@ function CubeLogo() {
   );
 }
 
-function BranchSelector({ branch, branchIndex, onPrevious, onNext }) {
+function BranchSelector({
+  branch,
+  branchIndex,
+  setBranchIndex,
+  onPrevious,
+  onNext,
+}) {
   return (
     <section className="branch-section">
       <div className="section-label">SELECT BRANCH</div>
 
       <div className="branch-row">
-        <button className="arrow-button" onClick={onPrevious} aria-label="Previous branch">
+        <button
+          className="arrow-button"
+          onClick={onPrevious}
+          aria-label="Previous branch"
+        >
           ‹
         </button>
 
         <h1 className="branch-title">{branch.title}</h1>
 
-        <button className="arrow-button" onClick={onNext} aria-label="Next branch">
+        <button
+          className="arrow-button"
+          onClick={onNext}
+          aria-label="Next branch"
+        >
           ›
         </button>
       </div>
@@ -187,13 +174,7 @@ function BranchSelector({ branch, branchIndex, onPrevious, onNext }) {
           <button
             key={branchItem.title}
             className={index === branchIndex ? "dot active-dot" : "dot"}
-            onClick={() => {
-              const nextIndex = index;
-              if (nextIndex !== branchIndex) {
-                const event = new CustomEvent("branch-change");
-                window.dispatchEvent(event);
-              }
-            }}
+            onClick={() => setBranchIndex(index)}
             aria-label={`Select ${branchItem.title}`}
           />
         ))}
@@ -258,9 +239,18 @@ const styles = `
   box-sizing: border-box;
 }
 
+html {
+  width: 100%;
+  min-height: 100%;
+  background: #060606;
+}
+
 body {
+  width: 100%;
+  min-height: 100%;
   margin: 0;
   background: #060606;
+  overflow-x: hidden;
 }
 
 button {
@@ -268,6 +258,7 @@ button {
 }
 
 .page-shell {
+  width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -277,14 +268,15 @@ button {
     linear-gradient(180deg, #020202 0%, #111111 100%);
   color: #191919;
   font-family: "Barlow Condensed", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .phone-frame {
-  width: min(100vw, 520px);
+  width: min(100%, 520px);
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  padding: 28px 36px 32px;
+  padding: 34px 34px 32px;
   border-radius: 28px;
   border: 2px solid #1f1f1f;
   background:
@@ -314,7 +306,6 @@ button {
   mix-blend-mode: overlay;
 }
 
-.status-bar,
 .menu-button,
 .main-header,
 .branch-section,
@@ -324,112 +315,9 @@ button {
   z-index: 1;
 }
 
-.status-bar {
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.status-time {
-  font-family: Arial, sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: #050505;
-  letter-spacing: -0.5px;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.signal-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 18px;
-}
-
-.signal-bars span {
-  width: 5px;
-  background: #050505;
-  border-radius: 4px;
-}
-
-.signal-bars span:nth-child(1) { height: 7px; }
-.signal-bars span:nth-child(2) { height: 10px; }
-.signal-bars span:nth-child(3) { height: 14px; }
-.signal-bars span:nth-child(4) { height: 18px; }
-
-.wifi-icon {
-  width: 24px;
-  height: 18px;
-  position: relative;
-}
-
-.wifi-icon span {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 3px solid #050505;
-  border-bottom: 0;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  border-radius: 50% 50% 0 0;
-}
-
-.wifi-icon span:nth-child(1) {
-  width: 24px;
-  height: 14px;
-  top: 0;
-}
-
-.wifi-icon span:nth-child(2) {
-  width: 16px;
-  height: 10px;
-  top: 5px;
-}
-
-.wifi-icon span:nth-child(3) {
-  width: 6px;
-  height: 6px;
-  top: 12px;
-  background: #050505;
-  border: 0;
-  border-radius: 50%;
-}
-
-.battery-icon {
-  width: 29px;
-  height: 15px;
-  border: 2px solid #050505;
-  border-radius: 3px;
-  padding: 2px;
-  position: relative;
-}
-
-.battery-icon::after {
-  content: "";
-  width: 3px;
-  height: 7px;
-  background: #050505;
-  position: absolute;
-  right: -5px;
-  top: 2px;
-  border-radius: 0 2px 2px 0;
-}
-
-.battery-icon div {
-  width: 100%;
-  height: 100%;
-  background: #050505;
-}
-
 .menu-button {
   width: 42px;
-  margin-top: 52px;
+  margin-top: 24px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -450,14 +338,14 @@ button {
 }
 
 .main-header {
-  margin-top: 22px;
+  margin-top: 24px;
   text-align: center;
 }
 
 .cube-logo {
-  width: 112px;
-  height: 96px;
-  margin: 0 auto 25px;
+  width: 104px;
+  height: 90px;
+  margin: 0 auto 24px;
   position: relative;
   filter:
     drop-shadow(0 0 8px var(--cyan-glow))
@@ -475,35 +363,35 @@ button {
 }
 
 .cube-top {
-  width: 58px;
-  height: 58px;
-  left: 27px;
+  width: 54px;
+  height: 54px;
+  left: 25px;
   top: 0;
   transform: rotate(45deg) skew(-8deg, -8deg);
 }
 
 .cube-left {
-  width: 58px;
-  height: 58px;
-  left: 12px;
-  top: 39px;
+  width: 54px;
+  height: 54px;
+  left: 11px;
+  top: 36px;
   transform: skewY(30deg);
   clip-path: polygon(0 0, 100% 24%, 100% 100%, 0 76%);
 }
 
 .cube-right {
-  width: 58px;
-  height: 58px;
-  right: 12px;
-  top: 39px;
+  width: 54px;
+  height: 54px;
+  right: 11px;
+  top: 36px;
   transform: skewY(-30deg);
   clip-path: polygon(0 24%, 100% 0, 100% 76%, 0 100%);
 }
 
 .brand-title {
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: clamp(42px, 10vw, 61px);
-  letter-spacing: 15px;
+  font-size: clamp(38px, 10vw, 58px);
+  letter-spacing: clamp(7px, 2.8vw, 15px);
   line-height: 1;
   color: #101010;
   text-shadow:
@@ -517,8 +405,8 @@ button {
 .brand-subtitle {
   margin-top: 14px;
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: clamp(18px, 5vw, 27px);
-  letter-spacing: 15px;
+  font-size: clamp(17px, 5vw, 26px);
+  letter-spacing: clamp(8px, 3.2vw, 15px);
   color: #252525;
   text-shadow:
     0 1px 0 rgba(255,255,255,0.7),
@@ -526,14 +414,14 @@ button {
 }
 
 .branch-section {
-  margin-top: 56px;
+  margin-top: 52px;
   text-align: center;
 }
 
 .section-label {
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: clamp(21px, 5vw, 29px);
-  letter-spacing: 4px;
+  font-size: clamp(20px, 5vw, 29px);
+  letter-spacing: clamp(3px, 1vw, 4px);
   color: #303030;
   text-shadow:
     0 1px 0 rgba(255,255,255,0.75),
@@ -541,18 +429,18 @@ button {
 }
 
 .branch-row {
-  margin-top: 32px;
+  margin-top: 28px;
   display: grid;
-  grid-template-columns: 44px 1fr 44px;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
 }
 
 .arrow-button {
   border: 0;
   background: transparent;
   color: var(--cyan);
-  font-size: 56px;
+  font-size: 52px;
   line-height: 1;
   font-weight: 300;
   cursor: pointer;
@@ -562,12 +450,16 @@ button {
 }
 
 .branch-title {
+  min-width: 0;
   margin: 0;
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: clamp(30px, 8vw, 43px);
+  font-size: clamp(28px, 8vw, 43px);
   font-weight: 500;
-  letter-spacing: 11px;
+  letter-spacing: clamp(4px, 2.4vw, 11px);
   color: var(--cyan);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
   text-shadow:
     0 0 8px var(--cyan-glow),
     0 1px 0 #ffffff,
@@ -575,10 +467,10 @@ button {
 }
 
 .branch-dots {
-  margin-top: 24px;
+  margin-top: 22px;
   display: flex;
   justify-content: center;
-  gap: 32px;
+  gap: 30px;
 }
 
 .dot {
@@ -603,23 +495,23 @@ button {
 }
 
 .service-section {
-  margin-top: 52px;
+  margin-top: 50px;
 }
 
 .service-list {
   margin-top: 34px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 28px;
 }
 
 .service-row {
   width: 100%;
   min-height: 92px;
   display: grid;
-  grid-template-columns: 44% 1fr;
+  grid-template-columns: minmax(128px, 42%) minmax(0, 1fr);
   align-items: center;
-  gap: 24px;
+  gap: 22px;
   border: 0;
   background: transparent;
   text-align: left;
@@ -628,8 +520,9 @@ button {
 }
 
 .service-button {
+  width: 100%;
   min-height: 72px;
-  padding: 15px 12px;
+  padding: 14px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -646,9 +539,11 @@ button {
   border: 2px solid var(--cyan);
   color: var(--cyan);
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: clamp(20px, 5.3vw, 31px);
-  letter-spacing: 7px;
+  font-size: clamp(18px, 4.8vw, 29px);
+  letter-spacing: clamp(2px, 1.5vw, 7px);
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
   text-shadow:
     0 0 8px var(--cyan-glow),
     0 1px 0 rgba(255,255,255,0.8);
@@ -660,11 +555,12 @@ button {
 }
 
 .service-description {
+  min-width: 0;
   margin: 0;
   color: #262626;
   font-size: clamp(19px, 4.6vw, 25px);
-  line-height: 1.43;
-  letter-spacing: 0.4px;
+  line-height: 1.38;
+  letter-spacing: 0.3px;
   font-weight: 400;
   text-shadow:
     0 1px 0 rgba(255,255,255,0.6),
@@ -672,9 +568,9 @@ button {
 }
 
 .bottom-system-bar {
-  margin-top: 36px;
-  min-height: 42px;
-  padding: 10px 16px;
+  margin-top: 44px;
+  min-height: 48px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -691,8 +587,9 @@ button {
   border: 1px solid rgba(0,0,0,0.55);
   color: #303030;
   font-family: "Orbitron", Arial, sans-serif;
-  font-size: clamp(12px, 3.2vw, 16px);
-  letter-spacing: 5px;
+  font-size: clamp(12px, 3vw, 16px);
+  letter-spacing: clamp(3px, 1vw, 5px);
+  line-height: 1.65;
   text-align: center;
   text-shadow:
     0 1px 0 rgba(255,255,255,0.62),
@@ -706,71 +603,164 @@ button {
 
 @media (max-width: 430px) {
   .phone-frame {
-    padding: 24px 24px 28px;
+    width: 100%;
+    min-height: 100vh;
+    padding: 28px 18px 28px;
     border-radius: 0;
     border-left: 0;
     border-right: 0;
   }
 
   .menu-button {
-    margin-top: 44px;
+    width: 38px;
+    margin-top: 18px;
+    gap: 9px;
   }
 
   .main-header {
-    margin-top: 18px;
+    margin-top: 22px;
   }
 
   .cube-logo {
-    width: 92px;
-    height: 80px;
+    width: 84px;
+    height: 74px;
     margin-bottom: 22px;
   }
 
   .cube-top {
-    width: 48px;
-    height: 48px;
-    left: 22px;
+    width: 44px;
+    height: 44px;
+    left: 20px;
   }
 
   .cube-left,
   .cube-right {
-    width: 48px;
-    height: 48px;
-    top: 32px;
+    width: 44px;
+    height: 44px;
+    top: 30px;
   }
 
   .cube-left {
-    left: 10px;
+    left: 8px;
   }
 
   .cube-right {
-    right: 10px;
+    right: 8px;
   }
 
   .brand-title {
-    letter-spacing: 10px;
+    font-size: 40px;
+    letter-spacing: 7px;
   }
 
   .brand-subtitle {
-    letter-spacing: 11px;
+    font-size: 19px;
+    letter-spacing: 9px;
   }
 
   .branch-section {
     margin-top: 48px;
   }
 
+  .section-label {
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+
+  .branch-row {
+    margin-top: 28px;
+    grid-template-columns: 26px minmax(0, 1fr) 26px;
+    gap: 6px;
+  }
+
+  .arrow-button {
+    font-size: 42px;
+  }
+
   .branch-title {
-    letter-spacing: 7px;
+    font-size: clamp(28px, 8.8vw, 36px);
+    letter-spacing: clamp(3px, 1.8vw, 6px);
+  }
+
+  .branch-dots {
+    margin-top: 22px;
+    gap: 26px;
+  }
+
+  .dot {
+    width: 15px;
+    height: 15px;
+  }
+
+  .service-section {
+    margin-top: 48px;
+  }
+
+  .service-list {
+    margin-top: 34px;
+    gap: 26px;
   }
 
   .service-row {
-    grid-template-columns: 42% 1fr;
-    gap: 18px;
+    grid-template-columns: minmax(124px, 43%) minmax(0, 1fr);
+    gap: 14px;
+    min-height: 92px;
   }
 
   .service-button {
-    min-height: 67px;
+    min-height: 66px;
+    font-size: clamp(17px, 4.8vw, 20px);
+    letter-spacing: clamp(2px, 1.2vw, 4px);
+    padding: 12px 8px;
+  }
+
+  .service-description {
+    font-size: 21px;
+    line-height: 1.36;
+  }
+
+  .bottom-system-bar {
+    margin-top: 44px;
+    padding: 12px 14px;
+    font-size: 13px;
     letter-spacing: 4px;
+    line-height: 1.75;
+  }
+}
+
+@media (max-width: 375px) {
+  .phone-frame {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .brand-title {
+    font-size: 37px;
+    letter-spacing: 6px;
+  }
+
+  .brand-subtitle {
+    font-size: 18px;
+    letter-spacing: 8px;
+  }
+
+  .branch-title {
+    font-size: 30px;
+    letter-spacing: 4px;
+  }
+
+  .service-row {
+    grid-template-columns: minmax(116px, 42%) minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .service-button {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .service-description {
+    font-size: 20px;
   }
 }
 
